@@ -7,3 +7,5 @@ Prevention is the best measure in the fight against West Nile Virus. That mean e
 
 
 Please feel free to track our progress on our [Trello Board](https://trello.com/b/OHzR6t4k).
+
+More detailed information about the goals of our project can be found [here](https://github.com/cl65610/west_nile/blob/master/research/Scientific_Method.ipynb).
