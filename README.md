@@ -23,10 +23,12 @@ The process of creating these spray zones required three steps:
   1. We ran a DBSCAN clustering on the spray locations. That created 13 distinct "spray zones."
   2. This cluster information became a feature of our spray data, and we could therefore set it as a target for modelling. That model would become the model used to predict which spray zone a mosquito trap fell in. We ran several models on this data, and our most accurate model as an Extra Trees Classifier. Extra trees models are notoriously prone to overfitting, but we felt comfortable with this because we were dealing with latitude and longitude data and our out of sample data would be very similar to our training data.
   3. The extra trees model that performed best was used to predict which spray zone a mosquiot trap fell into. The final results of this can be seen in the image below. The mosquito traps are morked by colored 'X's, and the spray zones are the different-colored clusters on the map. 
-  
 ![DBSCAN Image](https://raw.githubusercontent.com/cl65610/west_nile/master/assets/visualizations/spray_zones_plus_labels.png "Spray Zones with Traps Labeled")
-
+After these steps were completed, and after other miscellaneous cleanings, the data was ready for modeling. The results of which are described in the next section.
 
 ## Results 
+Given the relatively low number of positive West Nile Tests, a simple accuracy score was an insufficient measure for judging a model. Therefore, we optimized all of our models toward their AUC scores. The model that performed the best on our training data was an Extra Trees classifier. That model had an AUC score of 0.99. After some initial excitement, we realized just how overfit this model was to our training data. And since our validation set comprised years for which we had no information, this overfitting would certainly hurt our final score. We had other models that didn't perform quite as well on our data, specifically because they were a little more skeptical when it came to diagnosing West Nile. We chose to go with Voting Classifier that combined weighted the predictions of many different models in an attempt to reach a consensus between more and less skeptical models. A graph showing our training ROC curves and AUC scores can be found below, and a more detailed write-up of our modeling can be found [here](https://github.com/cl65610/west_nile/blob/master/models/final_model_creation.ipynb).
 
-* talk about best model
+![ROC Scores](https://raw.githubusercontent.com/cl65610/west_nile/master/assets/visualizations/roc_curve_compilation.png "ROC curves and AUC Scores")
+
+The Voting classifier we used as a final predictor was submitted to Kaggle after the competition closed, and received 0.716 as an accuracy score. This would have placed us in 633rd place out of approximately 1300 scores. This score was also the best in our class by a significant margin.
